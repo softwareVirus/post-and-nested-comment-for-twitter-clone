@@ -1,0 +1,36 @@
+type Post {
+  id: Int!
+  content: String!
+  date: String!
+  commentCount: Int
+  thumbsUp: Int
+  thumbsDown: Int
+  rocket: Int
+  heart: Int
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  date: String!
+  children: [Comment]
+}
+
+type Reaction {
+  id: ID!
+  reactionType: String
+  createdAt: String!
+  postId: Int
+  commentId: Int
+}
+
+type Query {
+  listComments(id: Int): [Comment]
+  listPosts(id: Int): [Post]
+}
+
+type Mutation {
+  addComment(content: String!, parentPost: Int!, parentId: Int): [Comment]
+  addPost(content: String): [Post]
+  addReaction(reactionType: String!, postId: Int, commentId: Int): Reaction
+}
